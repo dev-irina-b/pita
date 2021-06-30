@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "323850627789",
+    "project_id": "pita-6938f",
+    "storage_bucket": "pita-6938f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323850627789:android:e979553d65eaaf15065784",
+        "android_client_info": {
+          "package_name": "ru.devcold.pita"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323850627789-npf8s0gkp8quk8a73a64dk5hbk7iqo8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgL3QsyB1STgXRj_9JXYJjuI02Wv8WpuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323850627789-npf8s0gkp8quk8a73a64dk5hbk7iqo8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

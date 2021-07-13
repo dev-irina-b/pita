@@ -16,6 +16,12 @@
     <string name="resend_code">Отправить код повторно</string>
     <string name="enter_valid_code">Вы ввели неправильный код.</string>
     <string name="enter_code">Введите код.</string>
-    <string name="next">Дальше</string>
+    <string name="next">Далee</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="initial_profile_activity_description">Как к вам обращаться?</string>
+    <string name="enter_your_name">Введите имя</string>
+    <string name="userName">Имя</string>
+    <string name="hello_user">Hello %1$s!</string>
+    <string name="sign_out">Выйти</string>
 
 </resources>

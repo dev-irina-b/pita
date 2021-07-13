@@ -5,8 +5,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface.BOLD
 import android.os.Bundle
+import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.Log
@@ -83,43 +85,31 @@ class SmsCodeActivity : BaseActivity() {
 
         binding.next.setOnClickListener {
             if(binding.smsCode.editText!!.text.isNullOrEmpty()) {
-                toast(R.string.enter_code)
+                binding.smsCode.isErrorEnabled = true
+                binding.smsCode.error = resources.getString(R.string.enter_code)
             }else
               verifyCode(binding.smsCode.editText!!.text.toString())
         }
+        countdownForResend()
+        binding.resendCode.setOnClickListener {
+            resendVerificationCode()
+            binding.countdown.visibility = View.VISIBLE
+            binding.resendCode.visibility = View.INVISIBLE
+            countdownForResend()
+        }
 
-        /*binding.smsCode.editText!!.addTextChangedListener(object: TextWatcher {
+        binding.smsCode.editText!!.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (binding.smsCode.isErrorEnabled)
+                    binding.smsCode.error = null
+            }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                TODO("Not yet implemented")
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(binding.smsCode.editText!!.length() == 6) {
-                    signInWithPhoneAuthCredential()
-                }else
-                    binding.smsCode.isErrorEnabled = true
-                    binding.smsCode.error = resources.getString(R.string.enter_valid_code)
             }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (binding.smsCode.isErrorEnabled)
-                binding.smsCode.error = null
-            }
-        })*/
-
-        lifecycleScope.launch {
-            for (i in 59 downTo 0) {
-                binding.countdown.text = resources.getString(R.string.countdown, i)
-                delay(1000)
-                if(i == 0) {
-                    binding.countdown.visibility = View.INVISIBLE
-                    binding.resendCode.visibility = View.VISIBLE
-                }
-            }
-        }
-        binding.resendCode.setOnClickListener {
-            resendVerificationCode()
-        }
+        })
     }
 
     private fun sendVerificationCode() {
@@ -156,7 +146,7 @@ class SmsCodeActivity : BaseActivity() {
     }
 
     override fun onLoginSucceed() {
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, InitialProfileActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -170,6 +160,27 @@ class SmsCodeActivity : BaseActivity() {
         optionsBuilder.setForceResendingToken(resendToken)
         PhoneAuthProvider.verifyPhoneNumber(optionsBuilder.build())
         Toast.makeText(this, "Код повторно отправлен", Toast.LENGTH_SHORT).show()
+
+    }
+
+    private fun countdownForResend() {
+        lifecycleScope.launch {
+            for (i in 59 downTo 0) {
+                binding.countdown.text = resources.getString(R.string.countdown, i)
+                delay(1000)
+                if(i == 0) {
+                    binding.countdown.visibility = View.INVISIBLE
+                    binding.resendCode.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
 
     }
 }

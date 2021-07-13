@@ -23,7 +23,7 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun onLoginSucceed() {
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, InitialProfileActivity::class.java)
         startActivity(intent)
         finish()
     }

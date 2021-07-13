@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.devcold.pita">
+    package="ru.devcold.pita" >
 
     <application
         android:allowBackup="true"
@@ -8,15 +8,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Pita">
-        <activity android:name=".LoginActivity">
+        android:theme="@style/Theme.Pita" >
+        <activity android:name=".SmsCodeActivity" >
+        </activity>
+        <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity">
+        <activity android:name=".HomeActivity" >
         </activity>
     </application>
 

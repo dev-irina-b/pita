@@ -12,8 +12,55 @@
         android:layout_height="match_parent"
         tools:context=".LoginActivity">
 
+        <TextView
+            android:id="@+id/title"
+            style="@style/LoginTitle"
+            android:text="@string/login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/LoginDescription"
+            android:text="@string/enter_phone_number_for_login"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneNumber"
+            style="@style/LoginTextInputLayout"
+            android:hint="@string/phone_number"
+            app:prefixText="@string/_7"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:errorEnabled="false"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="10"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/phoneSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/login"
+            app:layout_constraintTop_toBottomOf="@id/phoneNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
         <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
+            android:id="@+id/signIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -21,6 +68,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

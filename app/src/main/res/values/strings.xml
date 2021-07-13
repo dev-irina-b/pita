@@ -16,6 +16,6 @@
     <string name="resend_code">Отправить код повторно</string>
     <string name="enter_valid_code">Вы ввели неправильный код.</string>
     <string name="enter_code">Введите код.</string>
-    <string name="next">Next</string>
+    <string name="next">Дальше</string>
 
 </resources>

@@ -10,13 +10,17 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ru.devcold.pita.databinding.ActivitySmsCodeBinding
 import java.util.concurrent.TimeUnit
 
@@ -64,7 +68,6 @@ class SmsCodeActivity : BaseActivity() {
                 resendToken = token
             }
         }
-
         sendVerificationCode()
     }
 
@@ -104,14 +107,19 @@ class SmsCodeActivity : BaseActivity() {
             }
         })*/
 
-       /* lifecycleScope.launch {
+        lifecycleScope.launch {
             for (i in 59 downTo 0) {
                 binding.countdown.text = resources.getString(R.string.countdown, i)
+                delay(1000)
+                if(i == 0) {
+                    binding.countdown.visibility = View.INVISIBLE
+                    binding.resendCode.visibility = View.VISIBLE
+                }
             }
         }
-*/
-        //Тут проверка, если время вышло, то появляется кнопка Отправить повторно, при клике вызывается
-        //resend
+        binding.resendCode.setOnClickListener {
+            resendVerificationCode()
+        }
     }
 
     private fun sendVerificationCode() {
@@ -132,7 +140,6 @@ class SmsCodeActivity : BaseActivity() {
                     Log.d(TAG, "signInWithCredential:success")
                     val user = task.result?.user
                 } else {
-                    Toast.makeText(this, "Что-то пошло не так, мы скоро это починим", Toast.LENGTH_SHORT).show()
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         Toast.makeText(this, "Вы ввели неправильный код.", Toast.LENGTH_SHORT).show()
@@ -162,5 +169,7 @@ class SmsCodeActivity : BaseActivity() {
             .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
         optionsBuilder.setForceResendingToken(resendToken)
         PhoneAuthProvider.verifyPhoneNumber(optionsBuilder.build())
+        Toast.makeText(this, "Код повторно отправлен", Toast.LENGTH_SHORT).show()
+
     }
 }

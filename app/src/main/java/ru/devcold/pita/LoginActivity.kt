@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.gms.common.SignInButton
 import ru.devcold.pita.databinding.ActivityLoginBinding
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : LoginFunctionsActivity() {
 
     private val binding: ActivityLoginBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_login)
@@ -17,17 +17,9 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding
         setUpViews()
-
         if(signedIn)
             onLoginSucceed()
     }
-
-    override fun onLoginSucceed() {
-        val intent = Intent(this, InitialProfileActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
     private fun setUpViews() {
         binding.signIn.setSize(SignInButton.SIZE_WIDE)
         binding.signIn.setOnClickListener {
@@ -35,7 +27,7 @@ class LoginActivity : BaseActivity() {
         }
 
         binding.phoneSignIn.setOnClickListener {
-            val userInput = binding.phoneNumber.editText!!.text.toString()
+            val userInput = binding.phoneNumber.text
 
             if (userInput.length == 10) {
                 val countryCode = binding.phoneNumber.prefixText!!

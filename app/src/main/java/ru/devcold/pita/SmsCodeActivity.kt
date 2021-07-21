@@ -1,6 +1,5 @@
 package ru.devcold.pita
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface.BOLD
@@ -26,7 +25,7 @@ import kotlinx.coroutines.launch
 import ru.devcold.pita.databinding.ActivitySmsCodeBinding
 import java.util.concurrent.TimeUnit
 
-class SmsCodeActivity : BaseActivity() {
+class SmsCodeActivity : LoginFunctionsActivity() {
     private val binding: ActivitySmsCodeBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_sms_code)
     }
@@ -54,7 +53,7 @@ class SmsCodeActivity : BaseActivity() {
 
             override fun onVerificationFailed(e: FirebaseException) {
                 Log.w(TAG, "onVerificationFailed", e)
-                Toast.makeText(this@SmsCodeActivity, e.message, Toast.LENGTH_LONG).show();
+                Toast.makeText(this@SmsCodeActivity, e.message, Toast.LENGTH_LONG).show()
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
                 } else if (e is FirebaseTooManyRequestsException) {
@@ -88,7 +87,7 @@ class SmsCodeActivity : BaseActivity() {
                 binding.smsCode.isErrorEnabled = true
                 binding.smsCode.error = resources.getString(R.string.enter_code)
             }else
-              verifyCode(binding.smsCode.editText!!.text.toString())
+              verifyCode(binding.smsCode.text)
         }
         countdownForResend()
         binding.resendCode.setOnClickListener {
@@ -126,9 +125,11 @@ class SmsCodeActivity : BaseActivity() {
         Firebase.auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    onLoginSucceed()
                     Log.d(TAG, "signInWithCredential:success")
                     val user = task.result?.user
+                    getSPE().putString(USER_ID, user!!.uid).apply()
+                    val newUser: Boolean = task.result?.additionalUserInfo!!.isNewUser
+                    checkUser(newUser, user.uid)
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
@@ -139,16 +140,16 @@ class SmsCodeActivity : BaseActivity() {
     }
 
     private fun verifyCode(smsCode: String) {
-        val credential = storedVerificationId?.let { PhoneAuthProvider.getCredential(it, smsCode) }
-        if (credential != null) {
-            signInWithPhoneAuthCredential(credential)
+        try {
+            val credential = storedVerificationId?.let { PhoneAuthProvider.getCredential(it, smsCode) }
+            if (credential != null) {
+                signInWithPhoneAuthCredential(credential)
+            }
+        } catch (e : Exception) {
+            toast("Вы ввели неправильный код!")
+            Log.d(TAG, "verifyCode:failure", e)
         }
-    }
 
-    override fun onLoginSucceed() {
-        val intent = Intent(this, InitialProfileActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 
     private fun resendVerificationCode() {
@@ -160,7 +161,6 @@ class SmsCodeActivity : BaseActivity() {
         optionsBuilder.setForceResendingToken(resendToken)
         PhoneAuthProvider.verifyPhoneNumber(optionsBuilder.build())
         Toast.makeText(this, "Код повторно отправлен", Toast.LENGTH_SHORT).show()
-
     }
 
     private fun countdownForResend() {
@@ -181,6 +181,5 @@ class SmsCodeActivity : BaseActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
-
     }
 }

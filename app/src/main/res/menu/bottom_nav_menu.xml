@@ -8,14 +8,20 @@
         />
 
     <item
-        android:id="@+id/message"
-        android:title="@string/message"
+        android:id="@+id/messages"
+        android:title="@string/messages"
         android:icon="@drawable/ic_message"
         />
 
     <item
-        android:id="@+id/favorite"
-        android:title="@string/favorite"
+        android:id="@+id/add"
+        android:title="@string/add"
+        android:icon="@drawable/ic_add"
+        />
+
+    <item
+        android:id="@+id/favorites"
+        android:title="@string/favorites"
         android:icon="@drawable/ic_favorite"
         />
 

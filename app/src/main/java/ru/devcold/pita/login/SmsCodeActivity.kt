@@ -1,4 +1,4 @@
-package ru.devcold.pita
+package ru.devcold.pita.login
 
 import android.content.Intent
 import android.graphics.Color
@@ -22,6 +22,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import ru.devcold.pita.*
+import ru.devcold.pita.R
 import ru.devcold.pita.databinding.ActivitySmsCodeBinding
 import java.util.concurrent.TimeUnit
 

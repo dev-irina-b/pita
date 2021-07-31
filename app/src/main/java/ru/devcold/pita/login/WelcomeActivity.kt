@@ -1,4 +1,4 @@
-package ru.devcold.pita
+package ru.devcold.pita.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import ru.devcold.pita.*
 import ru.devcold.pita.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : BaseActivity() {

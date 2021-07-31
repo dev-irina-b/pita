@@ -1,4 +1,4 @@
-package ru.devcold.pita
+package ru.devcold.pita.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.common.SignInButton
+import ru.devcold.pita.R
 import ru.devcold.pita.databinding.ActivityLoginBinding
+import ru.devcold.pita.text
 
 class LoginActivity : LoginFunctionsActivity() {
 

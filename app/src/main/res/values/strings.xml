@@ -27,8 +27,14 @@
     <string name="messages">Сообщения</string>
     <string name="favorites">Избранные</string>
     <string name="profile">Профиль</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add">Разместить</string>
+    <string name="new_announcement">Новое объявление</string>
+    <string name="name">Название</string>
+    <string name="description">Описание</string>
+    <string name="shelf_life">Срок годности</string>
+    <string name="Indicate_your_location">Укажите ваше местоположение</string>
+    <string name="meeting_point">Место встречи</string>
+    <string name="quantity">Количество</string>
+    <string name="pick_up_times">Время получения</string>
 
 </resources>

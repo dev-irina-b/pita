@@ -1,4 +1,4 @@
-package ru.devcold.pita
+package ru.devcold.pita.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import ru.devcold.pita.*
 
 abstract class LoginFunctionsActivity: BaseActivity() {
     companion object {

@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import ru.devcold.pita.Order
 import ru.devcold.pita.OrderAdapter
+import ru.devcold.pita.R
 import ru.devcold.pita.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -23,6 +24,8 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding.orderRecycler.adapter = adapter
+
+        requireActivity().title = resources.getString(R.string.home)
 
         getOrders()
 

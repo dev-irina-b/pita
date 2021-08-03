@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/add"
-        android:name="ru.devcold.pita.fragments.AddFragment"
+        android:name="ru.devcold.pita.fragments.NewOrderFragment"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_new_order" />
 </navigation>

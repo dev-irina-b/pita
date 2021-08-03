@@ -38,14 +38,12 @@ class WelcomeActivity : BaseActivity() {
             val doc = database.collection("users").document(userId).get().await()
 
             val intent = if(doc.exists() && doc.contains("name")) {
-                toast("doc exist and have name")
                 getSPE().putString(USER_NAME, doc.getString("name")).apply()
                 Intent(this@WelcomeActivity, MainActivity::class.java)
             } else {
                 toast("doc not exist or doesn't contain name value")
                 Intent(this@WelcomeActivity, InitialProfileActivity::class.java)
             }
-
             startActivity(intent)
             finish()
         }

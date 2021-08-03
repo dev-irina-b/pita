@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import ru.devcold.pita.R
 import ru.devcold.pita.databinding.FragmentFavoritesBinding
 
 class FavoritesFragment : Fragment() {
@@ -14,6 +15,7 @@ class FavoritesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
 
+        requireActivity().title = resources.getString(R.string.favorites)
 
         return binding.root
     }

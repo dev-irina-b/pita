@@ -36,5 +36,8 @@
     <string name="meeting_point">Место встречи</string>
     <string name="quantity">Количество</string>
     <string name="pick_up_times">Время получения</string>
+    <string name="add_photo">Добавить фото</string>
+    <string name="take_photo">Сделать фотографию</string>
+    <string name="choose_from_gallery">Выбрать из галереи</string>
 
 </resources>

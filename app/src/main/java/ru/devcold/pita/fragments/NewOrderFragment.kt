@@ -34,14 +34,21 @@ class NewOrderFragment : Fragment() {
                 val newList = adapter.currentList.toMutableList()
                 newList.add(tmpUri)
                 adapter.submitList(newList)
+                checkAdapterListSize(adapter)
             }
         }
 
     private val selectImageFromGalleryResult =
-        registerForActivityResult(ActivityResultContracts.GetContent()) {
+        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) {
             val newList = adapter.currentList.toMutableList()
-            newList.add(it)
-            adapter.submitList(newList)
+            newList.addAll(it)
+            if(newList.size > 10) {
+                adapter.submitList(newList.subList(0,10))
+                checkAdapterListSize(adapter)
+            } else {
+                adapter.submitList(newList)
+                checkAdapterListSize(adapter)
+            }
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -60,6 +67,7 @@ class NewOrderFragment : Fragment() {
         binding.addPhoto.setOnClickListener {
             createPhotoAlertDialog()
         }
+
         binding.add.setOnClickListener {  }
     }
 
@@ -81,4 +89,10 @@ class NewOrderFragment : Fragment() {
     }
 
     private fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
+
+    private fun checkAdapterListSize(checkAdapter: NewPhotoAdapter) {
+        if(checkAdapter.currentList.size >=10) {
+            binding.addPhoto.visibility = View.GONE
+        } else binding.addPhoto.visibility = View.VISIBLE
+    }
 }

@@ -94,5 +94,6 @@ class NewOrderFragment : Fragment() {
         if(checkAdapter.currentList.size >=10) {
             binding.addPhoto.visibility = View.GONE
         } else binding.addPhoto.visibility = View.VISIBLE
+        //my change
     }
 }
